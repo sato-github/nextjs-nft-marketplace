@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../Navbar";
+import { Navbar } from "@ui";
 
-interface Props {
+type BaseLayoutProps = {
   children: React.ReactNode;
-}
+};
 
-const BaseLayout = ({ children }: Props) => {
+const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
     <>
       <Navbar />
