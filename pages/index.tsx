@@ -4,17 +4,7 @@ import { NftMeta } from "@/types/nft";
 import { useWeb3 } from "@components/providers/web3";
 
 export default function Home() {
-  const { ethereum, provider } = useWeb3();
-  console.log(provider);
-
-  const getAccounts = async () => {
-    const accounts = await provider!.listAccounts();
-    console.log(accounts[0]);
-  };
-
-  if (provider) {
-    getAccounts();
-  }
+  const { ethereum, provider, contract } = useWeb3();
 
   return (
     <BaseLayout>

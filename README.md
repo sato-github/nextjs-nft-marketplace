@@ -17,6 +17,7 @@ Create wallet and connect current page. To connect current page, open MetaMask a
 To check your ethereum is okay, press F12 and in console enter `window.ethereum`
 
 Install [Ganache](https://trufflesuite.com/ganache/) and install [truffle](https://trufflesuite.com/docs/truffle/how-to/install/)
+After install truffle run `truffle init`. Open Ganache and create workspace and add truffle-config.js to workspace.
 
 ## Technical stack
 
