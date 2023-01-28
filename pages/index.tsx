@@ -1,10 +1,9 @@
 import { BaseLayout, NftList } from "@ui";
-import nfts from "@/content/meta.json";
-import { NftMeta } from "@/types/nft";
-import { useWeb3 } from "@components/providers/web3";
+import { useListedNfts } from "@components/hooks/web3";
 
 export default function Home() {
-  const { ethereum, provider, contract } = useWeb3();
+  // const { ethereum, provider, contract } = useWeb3();
+  const { nfts } = useListedNfts();
 
   return (
     <BaseLayout>
@@ -21,7 +20,7 @@ export default function Home() {
               Mint a NFT to get unlimited ownership forever!
             </p>
           </div>
-          <NftList nfts={nfts as NftMeta[]} />
+          <NftList nfts={nfts.data} />
         </div>
       </div>
     </BaseLayout>

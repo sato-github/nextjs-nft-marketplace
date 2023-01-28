@@ -1,15 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js NFT Market place app
+
+## Features
+ - Create NFT
+ - Buy NFT
+ TODO
 
 ## Getting Started
 
-First, run the development server:
 
 ```bash
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Install [MetaMask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn) into your browser extension.
@@ -19,7 +21,7 @@ To check your ethereum is okay, press F12 and in console enter `window.ethereum`
 Install [Ganache](https://trufflesuite.com/ganache/) and install [truffle](https://trufflesuite.com/docs/truffle/how-to/install/)
 After install truffle run `truffle init`. Open Ganache and create workspace and add truffle-config.js to workspace.
 
-## Technical stack
+## Technologies used
 
 - nextjs
 - typescript

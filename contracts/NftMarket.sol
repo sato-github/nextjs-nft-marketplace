@@ -74,7 +74,7 @@ contract NftMarket is ERC721URIStorage, Ownable {
         return _ownedTokens[owner][index];
     }
 
-    function getAllftgsOnSale() public view returns (NftItem[] memory) {
+    function getAllNftsOnSale() public view returns (NftItem[] memory) {
         uint256 allItemsCounts = totalSupply();
         uint256 currentIndex = 0;
         NftItem[] memory items = new NftItem[](_listedItems.current());
