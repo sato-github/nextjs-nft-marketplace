@@ -1,9 +1,10 @@
 # Next.js NFT Market place app
 
 ## Features
+ - List NFTs
  - Create NFT
  - Buy NFT
- TODO
+ - 
 
 ## Getting Started
 
