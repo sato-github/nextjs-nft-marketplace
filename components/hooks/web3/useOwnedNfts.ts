@@ -2,8 +2,11 @@ import { Nft } from "@_types/nft";
 import { CryptoHookFactory } from "@_types/hooks";
 import useSWR from "swr";
 import { ethers } from "ethers";
+import { useCallback } from "react";
 
-type UseOwnedNftsResponse = {};
+type UseOwnedNftsResponse = {
+  listNft: (tokenId: number, price: number) => Promise<void>;
+};
 
 type OwnedNftsHookFactory = CryptoHookFactory<any, UseOwnedNftsResponse>;
 
@@ -36,8 +39,28 @@ export const hookFactory: OwnedNftsHookFactory =
       }
     );
 
+    const listNft = useCallback(
+      async (tokenId: number, price: number) => {
+        try {
+          const result = await contract?.placeNftOnSale(
+            tokenId,
+            ethers.utils.parseEther(price.toString()),
+            {
+              value: ethers.utils.parseEther((0.025).toString()),
+            }
+          );
+          await result?.wait();
+          alert("Item has been listed.");
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      [contract]
+    );
+
     return {
       ...swr,
+      listNft,
       data: data || [],
     };
   };

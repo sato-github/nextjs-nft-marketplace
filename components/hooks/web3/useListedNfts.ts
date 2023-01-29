@@ -2,8 +2,11 @@ import { Nft } from "@_types/nft";
 import { CryptoHookFactory } from "@_types/hooks";
 import useSWR from "swr";
 import { ethers } from "ethers";
+import { useCallback } from "react";
 
-type UseListedNftsResponse = {};
+type UseListedNftsResponse = {
+  buyNft: (tokenId: number, value: number) => Promise<void>;
+};
 
 type ListedNftsHookFactory = CryptoHookFactory<Nft[], UseListedNftsResponse>;
 
@@ -36,8 +39,24 @@ export const hookFactory: ListedNftsHookFactory =
       }
     );
 
+    const buyNft = useCallback(
+      async (tokenId: number, value: number) => {
+        try {
+          const result = await contract?.buyNft(tokenId, {
+            value: ethers.utils.parseEther(value.toString()),
+          });
+          await result?.wait();
+          alert("You have bought Nft. Please go to profile page");
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      [contract]
+    );
+
     return {
       ...swr,
+      buyNft,
       data: data || [],
     };
   };
