@@ -1,8 +1,8 @@
 # Next.js NFT Market place app
 
 ## Features
- - List NFTs
  - Create NFT
+ - List NFT to market
  - Buy NFT
  - 
 
