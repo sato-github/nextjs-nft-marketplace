@@ -7,6 +7,7 @@ import { NftMeta, PinataRes } from "@_types/nft";
 import axios from "axios";
 import { useWeb3 } from "@components/providers/web3";
 import { ethers } from "ethers";
+import { toast } from "react-toastify";
 
 const ALLOWED_FIELDS = ["name", "description", "image", "attributes"];
 
@@ -77,12 +78,18 @@ const NftCreate: NextPage = () => {
 
     try {
       const { account, signedData } = await getSignedData();
-      const res = await axios.post("/api/verify-image", {
+      const promise = axios.post("/api/verify-image", {
         address: account,
         signature: signedData,
         bytes,
         contentType: file.type,
         fileName: file.name.replace(/\.[^/.]+$/, ""),
+      });
+
+      const res = await toast.promise(promise, {
+        pending: "Uploading image",
+        success: "Image uploaded",
+        error: "Image upload error",
       });
       const data = res.data as PinataRes;
       setNftMeta({
@@ -97,11 +104,18 @@ const NftCreate: NextPage = () => {
   const uploadMetadata = async () => {
     try {
       const { account, signedData } = await getSignedData();
-      const res = await axios.post("/api/verify", {
+      const promise = axios.post("/api/verify", {
         address: account,
         signature: signedData,
         nft: nftMeta,
       });
+
+      const res = await toast.promise(promise, {
+        pending: "Uploading metadata",
+        success: "Metadata uploaded",
+        error: "Metadata upload error",
+      });
+
       const data = res.data as PinataRes;
       setNftURI(
         `${process.env.NEXT_PUBLIC_PINATA_DOMAIN}/ipfs/${data.IpfsHash}`
@@ -135,9 +149,11 @@ const NftCreate: NextPage = () => {
         }
       );
 
-      await transaction?.wait();
-
-      alert("NFT was created!");
+      await toast.promise(transaction!.wait(), {
+        pending: "Listing NFT",
+        success: "NFT Listed",
+        error: "NFT listing error",
+      });
     } catch (error: any) {
       console.error(error.message);
     }
